@@ -347,7 +347,7 @@ static void process_service_search_rsp (tCONN_CB *p_ccb, UINT8 *p_reply)
 #if (SDP_RAW_DATA_INCLUDED == TRUE)
 static void sdp_copy_raw_data (tCONN_CB *p_ccb, BOOLEAN offset)
 {
-    unsigned int    cpy_len, rem_len;
+    unsigned int    cpy_len;
     UINT32          list_len;
     UINT8           *p;
     UINT8           type;

@@ -1541,8 +1541,6 @@ void bta_ag_hsp_result(tBTA_AG_SCB *p_scb, tBTA_AG_API_RESULT *p_result)
 *******************************************************************************/
 void bta_ag_hfp_result(tBTA_AG_SCB *p_scb, tBTA_AG_API_RESULT *p_result)
 {
-    UINT8 code = bta_ag_trans_result[p_result->result];
-
     APPL_TRACE_DEBUG("bta_ag_hfp_result : res = %d", p_result->result);
 
     switch(p_result->result)

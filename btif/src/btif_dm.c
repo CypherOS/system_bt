@@ -238,7 +238,6 @@ static void bte_scan_filt_param_cfg_evt(UINT8 action_type,
                                            tBTA_DM_BLE_PF_AVBL_SPACE avbl_space,
                                            tBTA_DM_BLE_REF_VALUE ref_value,
                                            tBTA_STATUS status);
-#endif
 
 static char* btif_get_default_local_name();
 
@@ -1097,33 +1096,6 @@ static void btif_dm_pin_req_evt(tBTA_DM_PIN_REQ *p_pin_req)
 
                 pairing_cb.autopair_attempts++;
                 BTA_DmPinReply( (UINT8*)bd_addr.address, TRUE, 4, pin_code.pin);
-                return;
-            }
-        }
-        else if (check_cod(&bd_addr, COD_HID_JOYSTICK))
-        {
-            if(( btif_storage_is_wiimote (&bd_addr, &bd_name) == TRUE) &&
-                (pairing_cb.autopair_attempts == 0))
-            {
-                bt_bdaddr_t ad_addr;
-                bt_status_t status;
-                bt_property_t prop;
-                prop.type = BT_PROPERTY_BDADDR;
-                prop.val = (void*) &ad_addr;
-
-                status = btif_storage_get_adapter_property(&prop);
-
-                BTIF_TRACE_DEBUG("%s() Attempting auto pair", __FUNCTION__);
-
-                pin_code.pin[0] = ad_addr.address[5];
-                pin_code.pin[1] = ad_addr.address[4];
-                pin_code.pin[2] = ad_addr.address[3];
-                pin_code.pin[3] = ad_addr.address[2];
-                pin_code.pin[4] = ad_addr.address[1];
-                pin_code.pin[5] = ad_addr.address[0];
-
-                pairing_cb.autopair_attempts++;
-                BTA_DmPinReply( (UINT8*)bd_addr.address, TRUE, 6, pin_code.pin);
                 return;
             }
         }
